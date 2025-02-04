@@ -1,7 +1,7 @@
 const usersModel = require('../model/usersmodel');
 const postsModel = require('../model/postsmodel');
 const passport = require('passport');
-const genPassword = require('../lib/passwordUtils').genPassword;
+const {genPassword, validPassword} = require('../lib/passwordUtils');
 const { body, validationResult } = require("express-validator");
 
 const validateRegister = [
@@ -10,7 +10,7 @@ const validateRegister = [
         if (user) {
           throw new Error('Username already in use');
         }
-    }).withMessage(`Username already in use`),
+    }),
     body("password").trim()
         .isLength({ min: 8}).withMessage(`Password must be atleast 8 characters`),
     body('cpassword').custom((value, { req }) => {
@@ -19,8 +19,20 @@ const validateRegister = [
 ];
 
 const validateLogin = [
+    body('username').custom(async value => {
+        const user = await usersModel.getUserByUsername(value);
+        if (!user) {
+          throw new Error('Username incorrect');
+        }
+    }),
     body("password").trim()
-        .isLength({ min: 8}).withMessage(`Password must be atleast 8 characters`)
+        .isLength({ min: 8}).withMessage(`Password must be atleast 8 characters`).bail()
+        .custom(async (value, { req }) => {
+            const user = await usersModel.getUserByUsername(req.body.username);
+            if (user && !validPassword(value, user.hash, user.salt)){
+                throw new Error('Password is incorrect');
+            }
+        }),
 ];
 
 const validateJoin = [
