@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    <title>Posts</title>
+  </head>
+  <body>
+    <div id="container">
+        <h2>Join the club:</h2>
+        <%- include("template/errors.ejs") %>
+        <form class="main-form" method="POST" action="/join">
+            <label for="password">Enter secret password: </label>
+            <input id="password" name="password" type="password" required>
+
+            <input type="submit">
+        </form> 
+    </div>
+  </body>
+</html>

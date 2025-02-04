@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    <title>Login</title>
+  </head>
+  <body>
+    <div id="container">
+        <h1>Login</h1>
+          <p><a href="/register">Register?</a></p>
+          <%- include("template/errors.ejs") %>
+          <form class="main-form" method="POST" action="/login">
+              <label for="username">Username: </label>
+              <input id="username" name="username" type="text" required>
+
+              <label for="password">Password: </label>
+              <input id="password" name="password" type="password" required>
+
+              <input type="submit">
+          </form> 
+  </body>
+</html>

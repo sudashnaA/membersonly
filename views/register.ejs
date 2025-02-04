@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    <title>Register</title>
+  </head>
+  <body>
+    <div id="container">
+        <h1>Register</h1>
+          <p><a href="/login">Already have an account?</a></p>
+          <%- include("template/errors.ejs") %>
+          <form class="main-form" method="POST" action="/register">
+              <label for="username">Username: </label>
+              <input id="username" name="username" type="text" required>
+
+              <label for="firstname">First Name: </label>
+              <input id="firstname" name="firstname" type="text" required>
+
+              <label for="lastname">Last Name: </label>
+              <input id="lastname" name="lastname" type="text" required>
+
+              <label for="password">Password: </label>
+              <input id="password" name="password" type="password" required>
+
+              <label for="cpassword">Confirm Password: </label>
+              <input id="cpassword" name="cpassword" type="password" required>
+
+              <input type="submit">
+          </form> 
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<div>
+    <h3><strong><%= post.title %></strong></h3>
+    <p><strong><%= post.text %></strong></p>
+    <% if (!user) { %>
+        <p></p>
+    <% } else if (user.membershipstatus) { %>
+        <p>Posted by: <strong><%= post.username %></strong></p>
+        <p><%= post.timestamp %></p>
+
+        <% if (user.admin) { %>
+            <button onclick="window.location='/delete?postid=<%= post.postsid %>'">Delete</button>
+        <% } %>
+    <% } %>
+</div>

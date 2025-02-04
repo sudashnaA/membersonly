@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    <title>Posts</title>
+  </head>
+  <body>
+    <div id="container">
+        <h2>Posts:</h2>
+        <% if (!user) { %>
+            <p><a href="/login">Login to create posts</a></p>
+        <% } else if (user.membershipstatus) { %>
+            <p>Welcome: <%= user.username %> MEMBER</p>
+            <p><a href="/create-post">Create Post</a></p>
+            <p><a href="/logout">Logout</a></p>
+        <% } else { %>
+            <p>Welcome: <%= user.username %> NOT MEMBER</p>
+            <p><a href="/create-post">Create Post</a></p>
+            <p><a href="/join">Join the club</a></p>
+            <p><a href="/logout">Logout</a></p>
+        <% } %>
+        <div id="postscontainer">
+            <% posts.forEach(post => { %>
+              <%- include('./template/post', {post: post, user: user}); %>
+            <% }) %>
+         </div>
+  </body>
+</html>
